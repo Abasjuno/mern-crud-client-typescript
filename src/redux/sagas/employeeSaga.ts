@@ -6,6 +6,7 @@ import {
 import {
   createEmployeeSuccess,
   deleteEmployeeSuccess,
+  getAllEmployeesStart,
   getAllEmployeesSuccess,
   updateEmployeesSuccess,
 } from "../actionCreaters/actionCreaters";
@@ -21,6 +22,10 @@ import {
   getAllEmployeesFromApi,
   updateEmployeeFromApi,
 } from "../api/api";
+
+import { useDispatch } from "react-redux"
+import { Dispatch } from "redux";
+
 
 
 
@@ -44,6 +49,7 @@ function* createEmployeesSaga({ payload }: createEmployeeStart) {
   const { response, error } = yield call(createEmployeeFromApi, payload);
   if (response) {
     yield put(createEmployeeSuccess(response));
+    yield put(getAllEmployeesStart())
     // console.log("response Saga", response);
   } else {
     yield put({ type: Types.CREATE_EMPLOYEES_FAIL, payload: error });
@@ -58,6 +64,7 @@ function* updateEmployeesSaga({ payload }: updateEmployeeStart) {
     if (response) {
       console.log("res",response)
       yield put(updateEmployeesSuccess(response));
+      yield put(getAllEmployeesStart())
     } else {
       yield put({ type: Types.UPDATE_EMPLOYEES_FAIL, payload: error });
       console.log("error", error);
@@ -72,10 +79,10 @@ function* deletEmployeesSaga({ payload }: deleteEmployeeStart) {
   try {
     
     const { response, error } = yield call(deleteEmployeeFromApi, payload);
-  
     if (response) {
       yield put(deleteEmployeeSuccess(response));
-      console.log("response",response);
+      console.log("response", response);
+      yield put(getAllEmployeesStart())
     } else {
       yield put({ type: Types.DELETE_EMPLOYEES_FAIL, payload: error });
       console.log("error", error);

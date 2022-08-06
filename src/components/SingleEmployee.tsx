@@ -14,9 +14,8 @@ import { deleteEmployeeStart, getAllEmployeesStart } from "../redux/actionCreate
 
 export default function SingleEmployee(props: employeeType) {
   const dispach: Dispatch = useDispatch();
-  const handldelete = async () => {
-    await dispach(deleteEmployeeStart(props._id))
-    await dispach(getAllEmployeesStart())
+  const handldelete = () => {
+     dispach(deleteEmployeeStart(props._id))
   };
   return (
     <Wrap>

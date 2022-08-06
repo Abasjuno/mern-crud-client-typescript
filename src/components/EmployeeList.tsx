@@ -17,7 +17,7 @@ export default function EmployeeList(): JSX.Element {
     (employee) => employee.Name.toLowerCase().startsWith(value));
     
      
-  if (loading) {
+  if (loading===true) {
     return (
       <Center>
         <Loading />

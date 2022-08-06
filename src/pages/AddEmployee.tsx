@@ -9,10 +9,10 @@ import { handleSubmit } from "../util/services";
 export default function AddEmployee() {
   const dispatch: Dispatch = useDispatch();
   const navigate = useNavigate();
-  const handler = (e: FormEvent<HTMLFormElement>) => {
+  const handler = async (e: FormEvent<HTMLFormElement>) => {
     const employee = handleSubmit(e);
-    dispatch(createEmployeeStart(employee));
-    navigate("/employees");
+    await  dispatch(createEmployeeStart(employee));
+    await navigate("/employees");
   };
   return (
     <Main>

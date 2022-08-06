@@ -36,13 +36,13 @@ export default function UpdateEmployee() {
     setState({ ...state, Salary: parseInt(e.target.value) });
   };
   const dispatch: Dispatch = useDispatch();
-  const handler = async(e: FormEvent<HTMLFormElement>) => {
+  const handler = (e: FormEvent<HTMLFormElement>) => {
     const employee = handleSubmit(e);
     const _id = state._id;
     const data = { ...employee, _id };
 
-    await dispatch(updateEmployeesStart(data));
-    await navigate("/employees");
+     dispatch(updateEmployeesStart(data));
+     navigate("/employees");
   };
 
   return (
